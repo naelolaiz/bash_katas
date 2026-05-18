@@ -20,7 +20,16 @@ teardown() { teardown_tmpdir; }
 }
 
 @test "[9] exit non-zero when a child fails" {
-  run "$CMD" -j 2 bash -c '[[ $0 != b ]] || exit 5' a b c
+  # pmap's API is `pmap CMD ARG...` — one invocation per ARG. Passing
+  # `bash -c '...' a b c` would make pmap run `bash -c`, `bash '...'`,
+  # `bash a`, ... separately. Use a small helper script instead.
+  helper="$TMPDIR_FOR_TEST/fail-on-b.sh"
+  cat > "$helper" <<'EOF'
+#!/usr/bin/env bash
+[[ $1 != b ]] || exit 5
+EOF
+  chmod +x "$helper"
+  run "$CMD" -j 2 "$helper" a b c
   [ "$status" -ne 0 ]
 }
 
