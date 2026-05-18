@@ -4,11 +4,30 @@ A reference and a progressive set of practice exercises for advanced bash.
 
 Each exercise covers one topic with runnable snippets, then specifies a
 task with at least two distinct implementations and a written trade-off.
-Topics include parameter expansion, quoting, `printf`, here-docs, `find`,
-`xargs`, `awk` / `sed` / `grep`, regex, `read` / `mapfile`, traps,
-process substitution, coprocesses, parallel jobs, locking, atomic file
-replacement, signals, locale, arithmetic, and POSIX portability — 26
-exercises in total.
+Topics include
+[parameter expansion](https://www.gnu.org/s/bash/manual/html_node/Shell-Parameter-Expansion.html),
+[quoting](https://www.gnu.org/s/bash/manual/html_node/Quoting.html),
+[`printf`](https://www.gnu.org/s/bash/manual/html_node/Bash-Builtins.html#index-printf),
+[here-docs](https://www.gnu.org/s/bash/manual/html_node/Redirections.html#Here-Documents),
+[`find`](https://www.gnu.org/software/findutils/manual/html_node/find_html/),
+[`xargs`](https://man7.org/linux/man-pages/man1/xargs.1.html),
+[`awk`](https://www.gnu.org/software/gawk/manual/) /
+[`sed`](https://www.gnu.org/software/sed/manual/) /
+[`grep`](https://www.gnu.org/software/grep/manual/),
+[regex](https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap09.html),
+[`read`](https://www.gnu.org/s/bash/manual/html_node/Bash-Builtins.html#index-read) /
+[`mapfile`](https://www.gnu.org/s/bash/manual/html_node/Bash-Builtins.html#index-mapfile),
+[traps](https://www.gnu.org/s/bash/manual/html_node/Bourne-Shell-Builtins.html#index-trap),
+[process substitution](https://www.gnu.org/s/bash/manual/html_node/Process-Substitution.html),
+[coprocesses](https://www.gnu.org/s/bash/manual/html_node/Coprocesses.html),
+[parallel jobs](https://www.gnu.org/s/bash/manual/html_node/Job-Control-Basics.html),
+[locking](https://man7.org/linux/man-pages/man1/flock.1.html),
+[atomic file replacement](https://man7.org/linux/man-pages/man2/rename.2.html),
+[signals](https://man7.org/linux/man-pages/man7/signal.7.html),
+[locale](https://man7.org/linux/man-pages/man7/locale.7.html),
+[arithmetic](https://www.gnu.org/s/bash/manual/html_node/Shell-Arithmetic.html),
+and [POSIX portability](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html)
+— 26 exercises in total.
 
 The repo is self-contained. Each exercise has its own README, starter,
 and Bats tests under [docs/](docs/); the full index is in
