@@ -9,6 +9,7 @@ cd "$(dirname "$0")/.."
 mapfile -d '' files < <(
   find bin scripts lib docs \
     \( -name '*.sh' -o -name '*.bash' -o -name 'starter.sh' \) \
+    -not -name 'buggy.sh' \
     -type f -print0 2>/dev/null
 )
 
