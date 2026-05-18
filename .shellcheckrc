@@ -1,0 +1,15 @@
+# Project-wide ShellCheck config.
+# Reduce verbosity for didactic scripts; keep all real bugs.
+
+# Allow `source` of files outside the working tree (we source lib/log.sh from many places).
+external-sources=true
+
+# Bats tests look weird to shellcheck; they're handled separately.
+# (Bats files use a .bats extension which shellcheck doesn't lint by default — no action needed.)
+
+# Disable some style-only complaints that get in the way of small examples:
+#   SC2034 — unused variable: starter.sh files have many on purpose
+#   SC2155 — declare and assign separately: we use `local x=$(...)` deliberately in places
+#   SC1091 — sourced file not followed: lib/log.sh is real, but shellcheck's
+#            relative-source path resolution is unreliable across CWDs
+disable=SC2034,SC2155,SC1091

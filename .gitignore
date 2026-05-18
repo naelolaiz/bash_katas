@@ -1,0 +1,14 @@
+# scratch and generated data
+tmp/
+data/generated/
+*.tmp
+*.bak
+*.swp
+*~
+
+# editor backups
+.vscode/
+.idea/
+
+# bats artefacts
+*.bats.tmp

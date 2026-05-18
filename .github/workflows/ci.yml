@@ -1,0 +1,32 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: install bash + shellcheck + bats + gnu utils
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+              bash coreutils findutils grep sed gawk diffutils \
+              util-linux procps bc jq moreutils parallel \
+              shellcheck bats locales bsdmainutils bsdextrautils
+
+      - name: generate locales used by exercise 23
+        run: |
+          sudo sed -i 's/^# *\(en_US.UTF-8\)/\1/; s/^# *\(de_DE.UTF-8\)/\1/; s/^# *\(tr_TR.UTF-8\)/\1/' /etc/locale.gen
+          sudo locale-gen
+
+      - name: shellcheck
+        run: scripts/shellcheck-all.sh
+
+      - name: bats
+        run: |
+          find docs -name 'tests.bats' -print0 | xargs -0 -r bats
