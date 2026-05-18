@@ -5,7 +5,7 @@ load ../../lib/test_helpers
 
 setup() {
   setup_tmpdir
-  CMD="$BATS_TEST_DIRNAME/solutions/run-with-cleanup.sh"
+  CMD="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/run-with-cleanup.sh"
 }
 teardown() { teardown_tmpdir; }
 

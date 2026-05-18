@@ -5,7 +5,7 @@ load ../../lib/test_helpers
 
 setup() {
   setup_tmpdir
-  CMD="$BATS_TEST_DIRNAME/solutions/expand-lab.sh"
+  CMD="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/expand-lab.sh"
 }
 teardown() { teardown_tmpdir; }
 

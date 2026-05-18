@@ -5,7 +5,7 @@ load ../../lib/test_helpers
 
 setup() {
   setup_tmpdir
-  CMD="$BATS_TEST_DIRNAME/solutions/template.sh"
+  CMD="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/template.sh"
   TPL="$TMPDIR_FOR_TEST/t.tmpl"
 }
 teardown() { teardown_tmpdir; }

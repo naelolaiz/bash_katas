@@ -5,7 +5,7 @@ load ../../lib/test_helpers
 
 setup() {
   setup_tmpdir
-  CMD="$BATS_TEST_DIRNAME/solutions/safe-edit.sh"
+  CMD="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/safe-edit.sh"
   FILE="$TMPDIR_FOR_TEST/target"
   printf 'original\n' > "$FILE"
   chmod 0644 "$FILE"

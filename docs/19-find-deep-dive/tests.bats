@@ -5,7 +5,7 @@ load ../../lib/test_helpers
 
 setup() {
   setup_tmpdir
-  CMD="$BATS_TEST_DIRNAME/solutions/repo-find.sh"
+  CMD="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/repo-find.sh"
   TREE="$TMPDIR_FOR_TEST/tree"
   mkdir -p "$TREE/src" "$TREE/node_modules" "$TREE/.git"
   : > "$TREE/src/a.go"

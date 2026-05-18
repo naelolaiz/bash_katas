@@ -5,9 +5,9 @@ load ../../lib/test_helpers
 
 setup() {
   setup_tmpdir
-  PE="$BATS_TEST_DIRNAME/solutions/pathinfo-pe.sh"
-  CU="$BATS_TEST_DIRNAME/solutions/pathinfo-cu.sh"
-  AWK="$BATS_TEST_DIRNAME/solutions/pathinfo-awk.sh"
+  PE="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/pathinfo-pe.sh"
+  CU="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/pathinfo-cu.sh"
+  AWK="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/pathinfo-awk.sh"
 }
 teardown() { teardown_tmpdir; }
 

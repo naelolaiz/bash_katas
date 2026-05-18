@@ -5,7 +5,7 @@ load ../../lib/test_helpers
 
 setup() {
   setup_tmpdir
-  CMD="$BATS_TEST_DIRNAME/solutions/collect-ext.sh"
+  CMD="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/collect-ext.sh"
   seed_weird_filenames "$TMPDIR_FOR_TEST/tree"
 }
 teardown() { teardown_tmpdir; }

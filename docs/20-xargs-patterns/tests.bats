@@ -5,7 +5,7 @@ load ../../lib/test_helpers
 
 setup() {
   setup_tmpdir
-  CMD="$BATS_TEST_DIRNAME/solutions/parallel-hash.sh"
+  CMD="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/parallel-hash.sh"
   TREE="$TMPDIR_FOR_TEST/tree"
   mkdir -p "$TREE/sub"
   printf 'one\n'   > "$TREE/a"

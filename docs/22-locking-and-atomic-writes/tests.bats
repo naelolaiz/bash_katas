@@ -5,8 +5,8 @@ load ../../lib/test_helpers
 
 setup() {
   setup_tmpdir
-  SI="$BATS_TEST_DIRNAME/solutions/single-instance.sh"
-  AW="$BATS_TEST_DIRNAME/solutions/atomic-write.sh"
+  SI="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/single-instance.sh"
+  AW="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/atomic-write.sh"
   LOCK="$TMPDIR_FOR_TEST/lock"
 }
 teardown() { teardown_tmpdir; }

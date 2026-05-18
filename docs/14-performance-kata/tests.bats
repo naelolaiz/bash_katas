@@ -5,7 +5,7 @@ load ../../lib/test_helpers
 
 setup() {
   setup_tmpdir
-  CMD="$BATS_TEST_DIRNAME/solutions/perf-kata.sh"
+  CMD="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/perf-kata.sh"
   # tiny corpus: 4 distinct lowercased values
   cat > "$TMPDIR_FOR_TEST/in" <<'EOF'
 a b APPLE rest

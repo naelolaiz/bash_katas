@@ -5,9 +5,9 @@ load ../../lib/test_helpers
 
 setup() {
   setup_tmpdir
-  BASH_IMPL="$BATS_TEST_DIRNAME/solutions/timestamp-log-bash.sh"
-  AWK_IMPL="$BATS_TEST_DIRNAME/solutions/timestamp-log-awk.sh"
-  CU_IMPL="$BATS_TEST_DIRNAME/solutions/timestamp-log-coreutils.sh"
+  BASH_IMPL="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/timestamp-log-bash.sh"
+  AWK_IMPL="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/timestamp-log-awk.sh"
+  CU_IMPL="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/timestamp-log-coreutils.sh"
   INPUT=$(printf '%s\t%s\n' 1747573931 'first' 1747573932 'second')$'\n'
 }
 teardown() { teardown_tmpdir; }

@@ -5,8 +5,8 @@ load ../../lib/test_helpers
 
 setup() {
   setup_tmpdir
-  MANIFEST="$BATS_TEST_DIRNAME/solutions/manifest.sh"
-  DIFF="$BATS_TEST_DIRNAME/solutions/manifest-diff.sh"
+  MANIFEST="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/manifest.sh"
+  DIFF="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/manifest-diff.sh"
 
   mkdir -p "$TMPDIR_FOR_TEST/a" "$TMPDIR_FOR_TEST/b"
   printf 'one\n' > "$TMPDIR_FOR_TEST/a/x"

@@ -5,7 +5,7 @@ load ../../lib/test_helpers
 
 setup() {
   setup_tmpdir
-  COMP="$BATS_TEST_DIRNAME/solutions/filter-lines-completion.sh"
+  COMP="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/filter-lines-completion.sh"
 }
 teardown() { teardown_tmpdir; }
 

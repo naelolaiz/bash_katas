@@ -5,7 +5,7 @@ load ../../lib/test_helpers
 
 setup() {
   setup_tmpdir
-  CMD="$BATS_TEST_DIRNAME/solutions/repo-janitor.sh"
+  CMD="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/repo-janitor.sh"
   TREE="$TMPDIR_FOR_TEST/tree"
   mkdir -p "$TREE/sub" "$TREE/node_modules" "$TREE/.cache"
   printf 'same\n' > "$TREE/a"

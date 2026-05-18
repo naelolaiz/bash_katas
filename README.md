@@ -120,6 +120,25 @@ podman run --rm -it -v "$PWD:/work:rw" -w /work localhost/bash-katas:dev
 6. Re-solve in a different dialect (pure-bash, `awk`, coreutils pipeline)
    and write a one-paragraph trade-off comparison.
 
+### Running tests against a candidate implementation
+
+Each `tests.bats` resolves its solution paths as
+`${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/<file>.sh`. Override
+`KATA_SOL_DIR` to point at any directory whose filenames match
+`docs/NN-slug/solutions/*.sh`:
+
+```bash
+# run every exercise's suite against bin/
+KATA_SOL_DIR=$PWD/bin bats docs/*/tests.bats
+
+# convenience wrapper:
+scripts/test-against.sh bin            # all exercises
+scripts/test-against.sh bin 09         # only exercise 9
+```
+
+When `KATA_SOL_DIR` is unset the suite runs against the reference
+solutions under `docs/NN-slug/solutions/` (the default green state).
+
 ## Container
 
 The Containerfile freezes the toolchain (bash, shellcheck, bats, gnu coreutils,

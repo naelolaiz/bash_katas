@@ -5,7 +5,7 @@ load ../../lib/test_helpers
 
 setup() {
   setup_tmpdir
-  CMD="$BATS_TEST_DIRNAME/solutions/filter-lines.sh"
+  CMD="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/filter-lines.sh"
   cat > "$TMPDIR_FOR_TEST/in.txt" <<'EOF'
 apple
 Banana

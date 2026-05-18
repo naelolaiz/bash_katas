@@ -5,7 +5,7 @@ load ../../lib/test_helpers
 
 setup() {
   setup_tmpdir
-  CMD="$BATS_TEST_DIRNAME/solutions/log-analyse.sh"
+  CMD="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/log-analyse.sh"
   LOG="$TMPDIR_FOR_TEST/access.log"
   ALLOW="$TMPDIR_FOR_TEST/allow"
   # realistic CLF format: [date timezone] makes the date a 2-token field

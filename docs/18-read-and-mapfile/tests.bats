@@ -5,7 +5,7 @@ load ../../lib/test_helpers
 
 setup() {
   setup_tmpdir
-  CMD="$BATS_TEST_DIRNAME/solutions/count-lines.sh"
+  CMD="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/count-lines.sh"
   FILE="$TMPDIR_FOR_TEST/in"
   printf 'a\nb\nc\n' > "$FILE"
 }

@@ -5,8 +5,8 @@ load ../../lib/test_helpers
 
 setup() {
   setup_tmpdir
-  BASH_IMPL="$BATS_TEST_DIRNAME/solutions/tool.bash"
-  SH_IMPL="$BATS_TEST_DIRNAME/solutions/tool.sh"
+  BASH_IMPL="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/tool.bash"
+  SH_IMPL="${KATA_SOL_DIR:-$BATS_TEST_DIRNAME/solutions}/tool.sh"
   INPUT=$(printf '%s\n' '2026-05-18 INFO api started' \
                        '2026-05-18 ERROR api failed' \
                        '2026-05-18 INFO db ready')
