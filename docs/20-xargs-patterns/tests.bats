@@ -22,9 +22,10 @@ teardown() { teardown_tmpdir; }
 
 @test "[20] same content same hash" {
   out=$("$CMD" -j 2 "$TREE")
-  # find lines whose hashes are duplicated
+  # The setup creates exactly one duplicate pair (a == sub/a-dup);
+  # expect exactly one duplicated hash, not "≥1".
   dup=$(printf '%s\n' "$out" | awk '{print $1}' | sort | uniq -d | wc -l)
-  [ "$dup" -ge 1 ]
+  [ "$dup" -eq 1 ]
 }
 
 @test "[20] empty tree produces no output and exits 0" {
@@ -38,7 +39,9 @@ teardown() { teardown_tmpdir; }
   mkdir -p "$TMPDIR_FOR_TEST/sp"
   printf 'x\n' > "$TMPDIR_FOR_TEST/sp/a b.txt"
   out=$("$CMD" "$TMPDIR_FOR_TEST/sp")
-  [[ "$out" == *'a b.txt'* ]]
+  # Output line must contain BOTH a hex digest and the full filename
+  # (a substring match alone could be satisfied by accidental content).
+  [[ "$out" =~ ^[0-9a-f]{64}[[:space:]]+.*a\ b\.txt[[:space:]]*$ ]]
 }
 
 @test "[20] usage error on no DIR" {

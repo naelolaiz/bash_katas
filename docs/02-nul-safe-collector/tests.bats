@@ -24,10 +24,14 @@ teardown() { teardown_tmpdir; }
 }
 
 @test "[2] --nul output is NUL-separated" {
-  run "$CMD" --nul --source find txt "$TMPDIR_FOR_TEST/tree"
-  assert_status 0
-  # output contains at least one NUL byte
-  [[ "$output" == *$'\0'* || "$output" == *a*b* ]]
+  # bats's `run` captures output into a string, but bash strings cannot
+  # contain NUL bytes — they're stripped. Capture to a file and count
+  # NULs directly.
+  out_file="$TMPDIR_FOR_TEST/out.bin"
+  "$CMD" --nul --source find txt "$TMPDIR_FOR_TEST/tree" > "$out_file"
+  nul_count=$(tr -cd '\0' < "$out_file" | wc -c)
+  # 3 files (a b.txt, normal.txt, .txt) → 3 NUL terminators expected.
+  [ "$nul_count" -ge 1 ]
 }
 
 @test "[2] rejects EXT containing /" {

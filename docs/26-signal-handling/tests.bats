@@ -20,10 +20,13 @@ teardown() { teardown_tmpdir; }
 }
 
 @test "[26] survives SIGPIPE from downstream" {
-  # if the wrapper crashes on SIGPIPE, this exit status would be 141
+  # If the wrapper crashes on SIGPIPE its exit code would be 141 (128+13).
+  # The point of the test is that it does NOT crash, so 141 is forbidden.
+  # Acceptable: 0 (clean exit once `yes` itself hits EPIPE and dies) or
+  # any small non-zero from `yes`.
   run bash -c '"$0" yes | head -1' "$CMD"
-  # exit 0 or 141 acceptable; what matters is the shell doesn't blow up
-  [ "$status" -eq 0 ] || [ "$status" -eq 141 ] || [ "$status" -eq 1 ]
+  [ "$status" -ne 141 ]
+  [ "$status" -lt 128 ]   # also not killed by any other signal
 }
 
 @test "[26] usage error on no args" {

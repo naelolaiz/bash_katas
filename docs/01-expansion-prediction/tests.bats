@@ -30,6 +30,8 @@ teardown() { teardown_tmpdir; }
 @test "[1] solution: empty input arg" {
   run "$CMD" ""
   assert_status 0
+  # An empty path arg should still emit the labelled dump (length = 0).
+  [[ "$output" == *'length'*'= 0'* ]]
 }
 
 @test "[1] solution: --quoted produces no raw newline in value" {

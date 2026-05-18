@@ -21,13 +21,15 @@ teardown() { teardown_tmpdir; }
 }
 
 @test "[10] EOF triggers clean shutdown" {
-  # close stdin immediately
+  # stdin closed immediately; the client should drop out of its read loop,
+  # tear down bc, and exit cleanly (0) within the timeout.
   run timeout 5 bash -c '"$0" < /dev/null' "$CMD"
-  [ "$status" -ne 124 ]   # didn't time out
+  assert_status 0
 }
 
 @test "[10] -t TIMEOUT accepted as flag" {
-  out=$(printf 'quit\n' | "$CMD" -t 1 2>/dev/null)
-  # script should produce SOMETHING (or nothing) but not crash
-  true
+  # Flag must be parsed without error; the client should still cleanly
+  # shut down on quit (and not exceed the outer timeout).
+  run timeout 5 bash -c 'printf "quit\n" | "$0" -t 1' "$CMD"
+  assert_status 0
 }

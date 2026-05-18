@@ -30,7 +30,11 @@ teardown() { teardown_tmpdir; }
 EOF
   chmod +x "$helper"
   run "$CMD" -j 2 "$helper" a b c
-  [ "$status" -ne 0 ]
+  # pmap aggregates with "last non-zero exit wins"; the failing child
+  # exits 5, so pmap must propagate exactly 5 (asserting just "any
+  # non-zero" would also pass on accidental 127s from a broken test
+  # invocation).
+  [ "$status" -eq 5 ]
 }
 
 @test "[9] usage error on no command" {

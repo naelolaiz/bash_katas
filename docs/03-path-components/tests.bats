@@ -48,6 +48,10 @@ teardown() { teardown_tmpdir; }
 @test "[3] handles trailing slash" {
   run "$PE" /tmp/
   assert_status 0
+  # All five labelled fields must be present in the output.
+  for field in original dir base stem ext; do
+    grep -qE "^${field}=" <<< "$output"
+  done
 }
 
 @test "[3] usage error on no args" {

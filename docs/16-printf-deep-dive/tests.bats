@@ -12,18 +12,22 @@ setup() {
 }
 teardown() { teardown_tmpdir; }
 
-@test "[16] bash impl emits ISO timestamp tab message" {
+@test "[16] bash impl emits ISO timestamp + tab + message" {
   out=$(printf '%s' "$INPUT" | "$BASH_IMPL")
-  [[ "$out" == *'2025'* ]] || [[ "$out" == *'2024'* ]] || [[ "$out" == *'first'* ]]
-  [[ "$out" == *$'\t'first* ]]
+  # Each output line must start with an ISO-8601 timestamp, then a tab,
+  # then the corresponding message. Match the exact shape on line 1.
+  first_line=$(printf '%s' "$out" | head -1)
+  [[ "$first_line" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}[+-][0-9]{4}$'\t'first$ ]]
 }
 
-@test "[16] all three impls agree (line count)" {
-  bash=$(printf '%s' "$INPUT" | "$BASH_IMPL" | wc -l)
-  awk_=$(printf '%s' "$INPUT" | "$AWK_IMPL"  | wc -l)
-  cu=$(printf '%s' "$INPUT" | "$CU_IMPL"     | wc -l)
-  [ "$bash" -eq "$awk_" ]
-  [ "$awk_" -eq "$cu" ]
+@test "[16] all three impls produce identical output" {
+  # Strict equality, not just line count: the timestamp formatting,
+  # ordering, and trailing newline must all match across implementations.
+  bash_out=$(printf '%s' "$INPUT" | "$BASH_IMPL")
+  awk_out=$( printf '%s' "$INPUT" | "$AWK_IMPL")
+  cu_out=$(  printf '%s' "$INPUT" | "$CU_IMPL")
+  [ "$bash_out" = "$awk_out" ]
+  [ "$awk_out"  = "$cu_out"  ]
 }
 
 @test "[16] empty stdin produces empty output" {
